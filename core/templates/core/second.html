@@ -1,0 +1,87 @@
+{%extends 'core/base.html' %}
+
+{% block content %}
+  <h2>필터 폼 만들기</h2>
+  <h2>필터 선택에 따른 결과</h2>
+
+  <p>version: <strong>{{version}}</strong></p>
+
+  <form method="get">
+  	<fieldset>
+
+  		<legend>Role</legend>
+
+  		<ul>
+  		<li>
+  			<input type ="checkbox" name="roles" id="" value=""/>
+  			<label for="">암살자</label>
+  		
+  		<li>
+  			<input type ="checkbox" name="roles" id="" value="Fighter"/>
+  			<label for="">전사</label>
+  		
+  		<li>
+  			<input type ="checkbox" name="roles" id="" value="Tank"/>
+  			<label for="">탱커</label>
+  		</li>
+  		<li>
+  			<input type ="checkbox" name="roles" id="" value="Mage"/>
+  			<label for="">마법사</label>
+  		</li>
+  		<li>
+  			<input type ="checkbox" name="roles" id="" value="Markman"/>
+  			<label for="">원거리</label>
+  		</li>
+  		<li>
+  			<input type ="checkbox" name="roles" id="" value="Support"/>
+  			<label for="">서포터</label>
+  		</li>
+  		</ul>
+  	</fieldset>
+  	<fieldset>
+  		<ul>
+  			<li>
+		  		<label>방어:<span id="defenseValue"></span></label>
+		  		<input type="range" class="slider" min="1" max="10" value="0" id="defenseRange">
+		  	</li>
+  			<li>
+		  		<label>공력:<span id="attackValue"></span></label>
+		  		<input type="range" class="slider" min="1" max="10" value="0" id="attackRange">
+		  	</li>
+  			<li>
+		  		<label>마법:<span id="magicValue"></span></label>
+		  		<input type="range" class="slider" min="1" max="10" value="0" id="magicRange">
+		  	</li>
+  			<li>
+		  		<label>난이도:<span id="difficultyValue"></span></label>
+		  		<input type="range" class="slider" min="1" max="10" value="0" id="difficultyRange">
+		  	</li>
+		 </ul>
+	    <script>
+	    var slider = document.getElementById("attackRange");
+	    var output = document.getElementById("attackValue");
+	    output.innerHTML = slider.value;
+
+	    slider.oninput = function() {
+	      output.innerHTML = this.value;
+	    }
+	    </script>
+  	</fieldset>
+    <input type="text" name="username">
+    <button type="submit">search</button>
+  </form>
+
+  <!--결과화면-->
+  {% if search_result %}
+    {% if search_result.success %}
+      <p>
+        <strong>{{ search_result.name|default_if_none:search_result.login }}</strong> has
+        <strong>{{ search_result.public_repos }}</strong> public repositories.
+      </p>
+    {% else %}
+      <p><em>{{ search_result.message }}</em></p>
+    {% endif %}
+    <p>Rate limit: {{ search_result.rate.remaining }}/{{ search_result.rate.limit }}</p>
+  {% endif %}
+
+{% endblock %}

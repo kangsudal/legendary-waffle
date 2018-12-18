@@ -9,6 +9,10 @@
         margin: 0 auto;
         padding: 0 20px;
       }
+
+      .slider {
+        width: 20%;
+      }
     </style>
   </head>
   <body>
@@ -16,7 +20,7 @@
       <h1 style="margin-bottom: 0">RESTful APIs Example</h1>
       <a href="{% url 'home' %}">home</a> /
       <a href="{% url 'first' %}">first</a> /
-      <a href="">oxford dictionary</a>
+      <a href="{% url 'second' %}">second</a>
     </header>
     <hr>
     {% block content %}
