@@ -44,7 +44,7 @@ def second(request):
         request.session['champdata'] = response.json()
 
     champdata = request.session['champdata']
-    print(champdata.keys())
+    #print(champdata.keys())
 
     #search
     if request.method == 'GET':
@@ -54,7 +54,8 @@ def second(request):
         #search_query = request.GET.get('search_box', None)
 
         if role_query:
-            print(type(role_query))
+            #print(type(role_query))
+            print(role_query)
         else:
             print('there was nothing')
 
